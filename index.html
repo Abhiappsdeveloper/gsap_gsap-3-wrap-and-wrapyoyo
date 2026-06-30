@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GSAP 3 wrap() and wrapYoyo() utilities demo</title>
+    <link rel='stylesheet' href='https://codepen.io/GreenSock/pen/xxmzBrw.css'>
+    <style>
+        body {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-around;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .ball {
+            width: 100px;
+            height: 100px;
+            will-change: transform;
+        }
+
+        h2 {
+            margin: 20px;
+            text-align: center
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>GSAP 3 wrap() / wrapYoyo() utilities</h2>
+    <div id="ball1" class="ball flair flair--2"></div>
+    <div id="ball2" class="ball flair flair--4"></div>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js'></script>
+    <script>
+        gsap.defaults({ duration: 20, ease: "none" });
+
+        var windowWrap = gsap.utils.wrap(0, window.innerWidth),
+            windowYoyo = gsap.utils.wrapYoyo(0, window.innerWidth);
+
+        gsap.to("#ball1", {
+            x: 10000,
+            modifiers: {
+                x: x => windowWrap(parseFloat(x)) + "px"
+            }
+        });
+
+        gsap.to("#ball2", {
+            x: 10000,
+            modifiers: {
+                x: x => windowYoyo(parseFloat(x)) + "px"
+            }
+        });
+    </script>
+
+</body>
+
+</html>
